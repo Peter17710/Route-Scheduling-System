@@ -1,0 +1,29 @@
+import mongoose from "mongoose";
+
+const driverSchema = new mongoose.Schema({
+    id: { 
+        type: String,
+         required: true, 
+         unique: true 
+        },
+    name: { 
+        type: String,
+         required: true 
+        },
+    licenseType: { 
+        type: String,
+         required: true 
+        },
+    availability: {
+         type: Boolean,
+          default: true
+        },
+    history: [{ 
+        route: { type: mongoose.Schema.Types.ObjectId,
+         ref: 'Route' },
+        assignedAt: { type: Date, default: Date.now }
+    }]
+});
+
+const Driver = mongoose.model('Driver', driverSchema);
+export default Driver;
